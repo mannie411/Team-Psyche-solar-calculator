@@ -63,17 +63,17 @@ function App() {
             </div>
 
           </div>
-          <div className='calc-info bg-white fl w-100 w-50-ns pa2'>
+          <div className='calc-info bg-white fl w-100 w-50-ns pa2' id="modal-2">
             <div className=''>
               <div className='calc-total'>
-                <div>
-                  <h3>Total</h3>
-                  <h4>comsumption</h4>
+                <div className="dib mr4 ml4">
+                  <h3 className="ttu tracked">Calculations</h3>
+                  <h4>Total Consumption</h4>
                 </div>
-                <div>
+                <div className="dib mr4 ml4"> 
                   <img src={Thunderbolt} alt='thunderbolt' />
-                </div>
-                <div>300<span>Wh/day</span></div>
+                </div >
+                <div className="dib mr4 ml4">300<span>Wh/day</span></div>
               </div>
               <div className='calc-data'>
 
