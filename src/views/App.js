@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+
 import Logo from '../assets/images/Logo.svg'
-import Thunderbolt from '../assets/images/Thunderbolt.svg'
+import DisplayTable from '../components/DisplayTable';
+import AddItem from '../components/AddItem';
+import AddItemModal from '../components/AddItemModal';
+import CalcInfo from '../components/CalcInfo';
 
 
 
@@ -8,10 +12,48 @@ import Thunderbolt from '../assets/images/Thunderbolt.svg'
 
 class App extends Component {
 
-  
+  state = {
+    data: [{
+      key:  this.generateQuickGuid(),
+      appliance: 'AC Conditioner',
+      number: 3,
+      time: 4,
+      energy: 70,
+    }, {
+      key:  this.generateQuickGuid(),
+      appliance: 'Cooker',
+      number: 1,
+      time: 4,
+      energy: 70,
+    }, {
+      key:  this.generateQuickGuid(),
+      appliance: 'Television',
+      number: 4,
+      time: 4,
+      energy: 70,
+      
+  }],
+  }
+
   componentDidMount(){
     this.triggerModal();
+   
   }
+
+  generateQuickGuid() {
+    return Math.random().toString(36).substring(2, 15) +
+        Math.random().toString(36).substring(2, 15);
+  }
+
+  addItem = (data) => {
+    const newData = {key: this.generateQuickGuid(), ...data}
+  
+    this.setState({data: [...this.state.data, newData]})
+
+  }
+
+
+  
 
   triggerModal(){
     // Get the modal
@@ -41,10 +83,6 @@ class App extends Component {
     }
   }
 
-  handleSubmit(){
-    console.log('calculating')
-  }
-
   render() {  
 
   return (
@@ -65,77 +103,12 @@ class App extends Component {
                   <div className='ma3 tc'>
                     <h1>Add an appliance</h1>
                   </div>
-                  <div>
-                    <div className='ma3'>
-                      <label className=''>Name of appliance</label>
-                      <input  type='text' placeholder='Televsion' />
-                    </div>
-                    <div className='' >
-                      <div className='ma3 dib'>
-                        <label>Number of Appliance</label>
-                        <input type='number' placeholder='1' />
-                      </div>
-                      <div className='ma3 dib'>
-                        <label>Time  <span>Hr</span></label>
-                        <input type='number' placeholder='1' />
-                       
-                      </div>
-                      <div className='ma3 dib'>
-                        
-                        <label>Energy <span>Watt</span> </label>
-                        <input type='number' placeholder='1' />
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <button className='btn-add' type='submit' onClick={this.handleSubmit}>Add  Appliance</button>
-                  </div>
-              </div>
-              </div>
 
-              <div id="myModal" className="modal">
-
-               
-                <div className="modal-content">
-                 
-                  <div className=' '>
-             
-             <div className='ma3 tc'>
-               <h1>Add an appliance</h1>
-             </div>
-             <div>
-               <div className='ma3'>
-                 <label className=''>Name of appliance</label>
-                 <input  type='text' placeholder='Televsion' />
-               </div>
-               <div className='' >
-                 <div className='ma3 dib'>
-                   <label>Number of Appliance</label>
-                   <input type='number' placeholder='1' />
-                 </div>
-                 <div className='ma3 dib'>
-                   <label>Time  <span>Hr</span></label>
-                   <input type='number' placeholder='1' />
+                  <AddItem addItem={this.addItem} />
                   
-                 </div>
-                 <div className='ma3 dib'>
-                   
-                   <label>Energy <span>Watt</span> </label>
-                   <input type='number' placeholder='1' />
-                 </div>
-               </div>
-             </div>
-             <div>
-               <button className='btn-add' type='submit' onClick={this.handleSubmit}>Add  Appliance</button>
-             </div>
-
-             <div>
-               <button id='close' href='javascript;;'>Close</button>
-             </div>
-         </div>
-                </div>
-
-               </div>
+              </div>
+              </div>
+              <AddItemModal addItem={this.addItem} />
               
              
 
@@ -144,61 +117,30 @@ class App extends Component {
           
           <div className='calc-info bg-white fl '>
             <div className=''>
-              <div className='calc-total'>
-                <div className="mr4 ml4 mt3">
-                  <h3 className="ttu tracked">Calculations</h3>
-                </div>
-                <div className="dib mr4 ml4">  
-                  <h4>Total Consumption</h4>
-                </div>
-                <div className="dib mr4 ml4"> 
-                  <img src={Thunderbolt} alt='thunderbolt' />
-                </div >
-                <div className="dib mr4 ml4">300<span>Wh/day</span></div>
-              </div>
-              <div className='calc-data'>
-                <div className='ma3'>
+             
+                <CalcInfo data={this.state.data} />
+                <div className='calc-data'>
                   <h3 className='ttu'>Appliance List</h3>
                 </div>
                 <div className='ma3'>
-                <table>
-                  <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Number</th>
-                    <th>Time</th>
-                    <th>Energy</th>
-                  </tr>
-                  </thead>
-                 
-                  <tbody>
-                  <tr>
-                    <td>Cooker</td>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>20</td>
-                  </tr>
-                  <tr>
-                    <td>AC Conditioner</td>
-                    <td>5</td>
-                    <td>10</td>
-                    <td>70</td>
-                  </tr>
-                  <tr>
-                    <td>Radio</td>
-                    <td>2</td>
-                    <td>5</td>
-                    <td>10</td>
-                  </tr>
-                  </tbody>
+                  <table>
+                    <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Number</th>
+                      <th>Time</th>
+                      <th>Energy</th>
+                    </tr>
+                    </thead>
                   
-                 
-                </table>
-                </div>
+                    <tbody>
+                      <DisplayTable data={this.state.data} />
+                    </tbody>
+                  </table>
                 
-              </div>
+                </div>
             </div>
-          </div>
+            </div>
        
     
 
