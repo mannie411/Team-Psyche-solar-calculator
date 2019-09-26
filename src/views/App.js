@@ -120,7 +120,7 @@ class App extends Component {
              
                 <CalcInfo data={this.state.data} />
                 <div className='calc-data'>
-                  <h3 className='ttu'>Appliance List</h3>
+                  <h3 className='ttu ma3'>Appliance List</h3>
                 </div>
                 <div className='ma3'>
                   <table>
