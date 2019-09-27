@@ -15,10 +15,10 @@ import Thunderbolt from '../assets/images/Thunderbolt.svg'
 
         //Inverter  rating in kW
         const intInvRate = values/1000/0.8
-        const invRate = intInvRate * 25
+        const invRate = Math.ceil((intInvRate * 25)* 100) /100
 
         // UPS rating in kW
-        const upsRate = intInvRate + invRate
+        const upsRate = Math.ceil(( intInvRate + invRate)* 100) /100
 
         // Backup batteries kWH
         const intBut = 100*12*2/values
@@ -26,7 +26,7 @@ import Thunderbolt from '../assets/images/Thunderbolt.svg'
 
         // Required solar panel
         const panel = 18*5
-        const reqPanel = values/panel/100
+        const reqPanel =  Math.ceil(values/panel/100)
 
         return (
         <div className='calc-total'>
