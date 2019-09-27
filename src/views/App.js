@@ -13,26 +13,7 @@ import CalcInfo from '../components/CalcInfo';
 class App extends Component {
 
   state = {
-    data: [{
-      key:  this.generateQuickGuid(),
-      appliance: 'AC Conditioner',
-      number: 3,
-      time: 4,
-      energy: 70,
-    }, {
-      key:  this.generateQuickGuid(),
-      appliance: 'Cooker',
-      number: 1,
-      time: 4,
-      energy: 70,
-    }, {
-      key:  this.generateQuickGuid(),
-      appliance: 'Television',
-      number: 4,
-      time: 4,
-      energy: 70,
-      
-  }],
+    data: [],
   }
 
   componentDidMount(){
@@ -85,73 +66,56 @@ class App extends Component {
 
   render() {  
 
-  return (
-    <div className="App">
-      <header>
-       <div className='logo'>
-        <img src={Logo} alt='logo'/>
-
-       </div>
-      </header>
-      <main>
-      <div className="mw9 center ph3-ns">
-        
-          <div className="fl add-form bg-white mobile">
-           
+    return (
+      <div className="App">
+        <header>
+          <div className='logo'>
+            <img src={Logo} alt='logo'/>
+          </div>
+        </header>
+        <main>
+         <div className="mw9 center ph3-ns">
+            <div className="fl add-form bg-white mobile"> 
               <div className=' '>
-             
                   <div className='ma3 tc'>
                     <h1>Add an appliance</h1>
                   </div>
-
-                  <AddItem addItem={this.addItem} />
-                  
+                  <AddItem addItem={this.addItem} />         
               </div>
-              </div>
-              <AddItemModal addItem={this.addItem} />
-              
-             
-
             </div>
+                  <AddItemModal addItem={this.addItem} />
+          </div>
 
-          
           <div className='calc-info bg-white fl '>
             <div className=''>
-             
-                <CalcInfo data={this.state.data} />
-                <div className='calc-data'>
+              <CalcInfo data={this.state.data} />
+              <div className='calc-data'>
                   <h3 className='ttu ma3'>Appliance List</h3>
-                </div>
-                <div className='ma3'>
+              </div>
+              <div className='ma3'>
                   <table>
                     <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Number</th>
-                      <th>Time</th>
-                      <th>Energy</th>
-                    </tr>
+                      <tr>
+                        <th>Name</th>
+                        <th>Number</th>
+                        <th>Time</th>
+                        <th>Energy</th>
+                      </tr>
                     </thead>
-                  
                     <tbody>
-                      <DisplayTable data={this.state.data} />
+                        <DisplayTable data={this.state.data} />
                     </tbody>
                   </table>
-                
-                </div>
+              </div>
             </div>
+          </div>
+            <div >
+              <button id="myBtn" className='btn-add-circle' >+</button>
             </div>
-       
-    
-
-      <div >
-        <button id="myBtn" className='btn-add-circle' >+</button>
-
-      </div>
-      </main>
-    </div>
-  );
-}
+          </main>
+        </div>
+      );
+  }
 }
 
 export default App;
